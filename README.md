@@ -7,14 +7,15 @@ Requires Local Administrator Privileges on target machine
 
 If no hostname is specified, localhost will be enumerated
 
+Multiple hostnames can be provided separated by commas
 
 ## Example Usage
 ```
-execute-assembly /opt/SharpTools/AtYourService.exe WEB01.contoso.com
+execute-assembly /opt/SharpTools/AtYourService.exe WEB01.contoso.com,DEV02.contoso.com
 ```
 ### Output
 ```
-[*] Tasked beacon to run .NET program: AtYourService.exe WEB01.contoso.com
+[*] Tasked beacon to run .NET program: AtYourService.exe WEB01.contoso.com,DEV02.contoso.com
 [+] host called home, sent: 111705 bytes
 [+] received Output
 [+] Connecting to WEB01.contoso.com
@@ -26,5 +27,10 @@ execute-assembly /opt/SharpTools/AtYourService.exe WEB01.contoso.com
             Account:     contoso.com\ServerAdmin
             Description: Example Service runs on web servers
             System:      WEB01
+[+] Connecting to DEV02.contoso.com
+[+] Enumerating services...
+[+] Found 144 services running...
+[+] Filtering out LocalSystem and NT Authority Account services...
+[!] No other services identified on DEV02.contoso.com
 [+] Finished
 ```
