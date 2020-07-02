@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# Modified from and designed to work within Impacket by
 # SECUREAUTH LABS. Copyright 2018 SecureAuth Corporation. All rights reserved.
 #
 # This software is provided under under a slightly modified version
@@ -12,7 +13,7 @@
 #              e.g.: describe win32_process
 # 
 # Author:
-#  Alberto Solino (@agsolino)
+#  Mitchell Moser
 #
 # Reference for:
 #  DCOM
