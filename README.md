@@ -39,7 +39,7 @@ execute-assembly /opt/SharpTools/AtYourService.exe WEB01.contoso.com,DEV02.conto
 ```
 
 ## Python
-Built upon [Impacket's `wmiquery.py`](https://github.com/SecureAuthCorp/impacket) and requires Impacket to be installed on host.
+Built upon [Impacket's](https://github.com/SecureAuthCorp/impacket) [`wmiquery.py`](https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiquery.py) and requires Impacket to be installed on host.
 
 Place `AtYourService.py` in the `impacket/examples/` directory
 
