@@ -71,12 +71,24 @@ if __name__ == '__main__':
             print("[+] Filtering out LocalSystem and NT Authority Account services...")
             if len(services) == 0:
                 print("[!] No other services identified on %s" % address)
+            if len(services) & options.csv:
+                print("[+] adding %d services to %s" % (len(services), file_name))
             for i in range(0, len(services)):
-                print("[+] %14s: %s" % ("Service", services[i]['Service']))
-                print("%18s: %s" % ("Name", services[i]['Name']))
-                print("%18s: %s" % ("Account", services[i]['Account']))
-                print("%18s: %s" % ("Description", services[i]['Description']))
-                print("%18s: %s" % ("System", services[i]['System']))
+                if options.csv:
+                    with open(file_name, 'a') as outcsv:
+                        writer = csv.writer(outcsv, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
+                        writer.writerow([services[i]['Account'], 
+                                         services[i]['Name'], 
+                                         services[i]['Service'], 
+                                         services[i]['Description'], 
+                                         services[i]['System']
+                                         ])
+                else:
+                    print("[+] %14s: %s" % ("Service", services[i]['Service']))
+                    print("%18s: %s" % ("Name", services[i]['Name']))
+                    print("%18s: %s" % ("Account", services[i]['Account']))
+                    print("%18s: %s" % ("Description", services[i]['Description']))
+                    print("%18s: %s" % ("System", services[i]['System']))
             iEnum.RemRelease()
 
         def default(self, line):
@@ -105,6 +117,7 @@ if __name__ == '__main__':
     parser.add_argument('target', action='store', help='[[domain/]username[:password]@]<targetName or address>')
     parser.add_argument('-namespace', action='store', default='//./root/cimv2', help='namespace name (default //./root/cimv2)')
     parser.add_argument('-hosts', action='store', help='specify additional hosts to enumerate separated by comma')
+    parser.add_argument('-csv', action='store_true', help='export results to .csv file')
     parser.add_argument('-debug', action='store_true', help='Turn DEBUG output ON')
 
     group = parser.add_argument_group('authentication')
@@ -129,6 +142,14 @@ if __name__ == '__main__':
 
     options = parser.parse_args()
     hosts = []
+
+    if options.csv is True:
+        import csv
+        import datetime
+        file_name = datetime.datetime.now().strftime('./AtYourService_%b-%d-%Y-%H-%M.csv')
+        with open(file_name, 'w') as outcsv:
+            writer = csv.writer(outcsv, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL, lineterminator='\n')
+            writer.writerow(['Account', 'Name', 'Service', 'Description', 'System'])
 
     if options.debug is True:
         logging.getLogger().setLevel(logging.DEBUG)
