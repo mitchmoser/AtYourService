@@ -21,21 +21,20 @@ execute-assembly /opt/SharpTools/AtYourService.exe WEB01.contoso.com,DEV02.conto
 [*] Tasked beacon to run .NET program: AtYourService.exe WEB01.contoso.com,DEV02.contoso.com
 [+] host called home, sent: 111705 bytes
 [+] received Output
-[+] Connecting to WEB01.contoso.com
-[+] Enumerating services...
-[+] Found 213 services running...
-[+] Filtering out LocalSystem and NT Authority Account services...
-        [+] Service:     examplesvc
-            Name:        Example Service
-            Account:     contoso.com\ServerAdmin
-            Description: Example Service runs on web servers
-            System:      WEB01
-[+] Connecting to DEV02.contoso.com
-[+] Enumerating services...
-[+] Found 144 services running...
-[+] Filtering out LocalSystem and NT Authority Account services...
-[!] No other services identified on DEV02.contoso.com
-[+] Finished
+[+] WEB01.contoso.com - Connecting
+[+] DEV02.contoso.com - Connecting
+[+] WEB01.contoso.com - Enumerating services
+[+] DEV02.contoso.com - Enumerating services
+[+] WEB01.contoso.com - Found 213 services running
+[+] DEV02.contoso.com - Found 144 services running
+[+] WEB01.contoso.com - Filtering out LocalSystem and NT Authority Account services
+[+] DEV02.contoso.com - Filtering out LocalSystem and NT Authority Account services
+[+] Host: WEB01
+ Account: contoso.com\ServerAdmin
+ Service: examplesvc
+    Name: Example Service
+    Info: Example Service runs on web servers
+[!] DEV02.contoso.com - No other services identified
 ```
 
 ## Python
