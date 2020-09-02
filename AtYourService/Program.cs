@@ -34,7 +34,7 @@ namespace AtYourService
             // Requires Local Admin. Try catch for insufficient privs, network connectivity issues, etc
             try
             {
-                Console.WriteLine("[+] Connecting to {0}", host);
+                Console.WriteLine("[+] {0} - Connecting", host);
                 scope.Connect();
                 //https://stackoverflow.com/questions/842533/in-c-sharp-how-do-i-query-the-list-of-running-services-on-a-windows-server
                 using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query))
