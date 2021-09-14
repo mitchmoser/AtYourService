@@ -26,6 +26,7 @@ import os
 import logging
 
 from impacket.examples import logger
+from impacket.examples.utils import parse_target
 from impacket import version
 from impacket.dcerpc.v5.dtypes import NULL
 from impacket.dcerpc.v5.dcom import wmi
@@ -65,10 +66,9 @@ if __name__ == '__main__':
                     if str(e).find('S_FALSE') < 0:
                         raise
                     else:
-                        print("[+] Finished querying host")
+                        print("[+] Finished querying %s" % address)
                         break
             print("[+] Found %d services running..." % counter)
-            print("[+] Filtering out LocalSystem and NT Authority Account services...")
             if len(services) == 0:
                 print("[!] No other services identified on %s" % address)
             if len(services) & options.csv:
@@ -114,9 +114,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(add_help = True, description = "Queries all services on a host using Windows Management Instrumentation. " +
                                                                     "\nFilters out services running as LocalSystem, NT Authority\\LocalService, and NT Authority\\NetworkService")
-    parser.add_argument('target', action='store', help='[[domain/]username[:password]@]<targetName or address>')
+    parser.add_argument('target', action='store', help='[[domain/]username[:password]@]<comma separated targetNames or addresses>')
     parser.add_argument('-namespace', action='store', default='//./root/cimv2', help='namespace name (default //./root/cimv2)')
-    parser.add_argument('-hosts', action='store', help='specify additional hosts to enumerate separated by comma')
     parser.add_argument('-csv', action='store_true', help='export results to .csv file')
     parser.add_argument('-debug', action='store_true', help='Turn DEBUG output ON')
 
@@ -160,21 +159,17 @@ if __name__ == '__main__':
 
     import re
 
-    domain, username, password, address = re.compile('(?:(?:([^/@:]*)/)?([^@:]*)(?::([^@]*))?@)?(.*)').match(
-        options.target).groups('')
-    hosts.append(address)
+    domain, username, password, host = parse_target(options.target)
 
-    #In case the password contains '@'
-    if '@' in address:
-        password = password + '@' + address.rpartition('@')[0]
-        address = address.rpartition('@')[2]
+    # if multiple hosts specified
+    if ',' in host:
+        for target in host.split(','):
+            hosts.append(target)
+    else:
+        hosts.append(host)
 
     if domain is None:
         domain = ''
-
-    if options.hosts is not None:
-        for host in options.hosts.split(','):
-            hosts.append(host)
 
     if password == '' and username != '' and options.hashes is None and options.no_pass is False and options.aesKey is None:
         from getpass import getpass
