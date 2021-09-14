@@ -44,9 +44,9 @@ Place `AtYourService.py` in the `impacket/examples/` directory
 
 ### Example Usage
 ```
-python3 /usr/share/doc/python3-impacket/examples/AtYourService.py contoso/Bob@10.0.0.1 -hosts 10.0.0.2,10.0.0.3
+python3 /usr/share/doc/python3-impacket/examples/AtYourService.py contoso/Bob@10.0.0.1,10.0.0.2,10.0.0.3
 ```
-Specifying additional targets with the `-hosts` flag is optional
+Specifying additional targets by comma separation
 ### Output
 ```
 Impacket v0.9.21 - Copyright 2020 SecureAuth Corporation
@@ -56,12 +56,10 @@ Password:
 [+] Connected to 10.10.0.1
 [+] Finished querying host
 [+] Found 205 services running...
-[+] Filtering out LocalSystem nd NT Authority Account services...
 [!] No other services identified on 10.0.0.1
 [+] Connected to 10.0.0.2
 [+] Finished querying host
 [+] Found 202 services running...
-[+] Filtering out LocalSystem nd NT Authority Account services...
 [+]        Service: examplesvc
               Name: Example Service
            Account: ServerAdmin@contoso.com
