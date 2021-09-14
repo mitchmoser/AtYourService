@@ -69,6 +69,7 @@ if __name__ == '__main__':
                         print("[+] Finished querying %s" % address)
                         break
             print("[+] Found %d services running..." % counter)
+            print("[+] Filtering out LocalSystem and NT Authority Account services...")
             if len(services) == 0:
                 print("[!] No other services identified on %s" % address)
             if len(services) & options.csv:
