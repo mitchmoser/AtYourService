@@ -54,19 +54,21 @@ Impacket v0.9.21 - Copyright 2020 SecureAuth Corporation
 Password:
 [+] Enumerating services on 10.0.0.1, 10.0.0.2, 10.0.0.3
 [+] Connected to 10.10.0.1
-[+] Finished querying host
+[+] Finished querying 10.10.0.1
 [+] Found 205 services running...
+[+] Filtering out LocalSystem nd NT Authority Account services...
 [!] No other services identified on 10.0.0.1
 [+] Connected to 10.0.0.2
-[+] Finished querying host
+[+] Finished querying 10.0.0.2
 [+] Found 202 services running...
+[+] Filtering out LocalSystem nd NT Authority Account services...
 [+]        Service: examplesvc
               Name: Example Service
            Account: ServerAdmin@contoso.com
        Description: Example Service runs on web servers
             System: WEB01
 [+] Connected to 10.0.0.3
-[+] Finished querying host
+[+] Finished querying 10.0.0.3
 [+] Found 184 services running...
 [+] Filtering out LocalSystem nd NT Authority Account services...
 [!] No other services identified on 10.0.0.3
